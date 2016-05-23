@@ -1,0 +1,32 @@
+version: '2'
+services:
+
+  dbnode1:
+    container_name: dbnode1
+    build: .
+    image: kenjones/mongo-replica
+    environment:
+      DB_REPLICA_SET: testrep1
+      DB_NODE_ROLE: primary
+      REPLICA1: dbnode2
+      REPLICA2: dbnode3
+    ports:
+      - "27017"
+
+  dbnode2:
+    container_name: dbnode2
+    build: .
+    image: kenjones/mongo-replica
+    environment:
+      DB_REPLICA_SET: testrep1
+    ports:
+      - "27017"
+
+  dbnode3:
+    container_name: dbnode3
+    build: .
+    image: kenjones/mongo-replica
+    environment:
+      DB_REPLICA_SET: testrep1
+    ports:
+      - "27017"
